@@ -1,0 +1,235 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffe6f7;
+    font-family: "Poppins", sans-serif;
+}
+
+.fondo {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    z-index: 0;
+
+    background-image: url("img/fondo.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.buzon-container {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    pointer-events: none;
+}
+
+.buzon-container img {
+    pointer-events: auto; 
+}
+
+#buzon {
+    position: absolute;
+    width: 55vw;
+    max-width: 550px;
+
+    top: 38vh;
+    left: 1vw;
+
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.4s ease;
+}
+
+#buzon.abierto {
+    transform: translateY(-2vh);
+}
+
+#pila-cartas {
+    position: absolute;
+    top: 29vh;
+    left: 0vw;
+
+    width: 40vw;
+    height: 30vh;
+
+    z-index: 20;
+    overflow: visible;
+    transition: opacity 0.5s ease;
+}
+
+.pila-oculta {
+    opacity: 0;
+}
+
+.carta-mini {
+    position: absolute;
+    width: 50vw;
+    max-width: 500px;
+
+    cursor: pointer;
+    z-index: 30; 
+    transition: transform 0.3s ease;
+}
+
+@keyframes shake {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    25% { transform: translateX(calc(-50% + 2px)) rotate(1deg); }
+    50% { transform: translateX(calc(-50% - 2px)) rotate(-1deg); }
+    75% { transform: translateX(calc(-50% + 2px)) rotate(1deg); }
+    100% { transform: translateX(-50%) rotate(0deg); }
+}
+
+.carta-mini:hover {
+   animation: shake 0.5s ease;
+}
+
+.shake-next:hover {
+    animation: shake 0.4s ease;
+}
+
+#carta-grande {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3000;
+
+    background: rgba(255, 255, 255, 0.001); 
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+}
+
+.carta-grande-oculta {
+    display: none;
+}
+
+.carta-grande-mostrar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: cartaAparecer 0.4s ease forwards;
+    transform-origin: center;
+    will-change: transform, opacity;
+}
+
+.carta-grande-salir {
+    animation: cartaDesaparecer 0.35s ease forwards;
+    transform-origin: center;
+}
+
+@keyframes cartaAparecer {
+    0% {
+        opacity: 0;
+        scale: 0.8;
+    }
+    100% {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+@keyframes cartaDesaparecer {
+    0% {
+        opacity: 1;
+        filter: blur(0);
+         
+    }
+    100% {
+        opacity: 0;
+        filter: blur(6px);
+    }
+}
+
+#carta-img {
+    width: 20vw;
+    max-width: 450px;
+    height: auto;
+    border-radius: 10px;
+}
+
+#finish-btn {
+    margin-top: 2vh;
+    padding: 10px 24px;
+    background: #EC97B3;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+
+    font-family: "comicsansms", cursive;
+    color:#FDEFE7;
+}
+
+#finish-btn:hover {
+    background: #FDEFE7;
+    color: #EC97B3;
+    box-shadow: 0 0 10px #FDEFE7 inset !important; 
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+
+    #buzon {
+        width: 90vw;
+        top: 38vh;
+        left: 5vw;
+    }
+
+    #pila-cartas {
+        top: 39vh;
+        left: 34vw;
+        width: 45vw;
+    }
+
+    .carta-mini {
+        width: 55vw;
+        max-width: none;
+    }
+
+    #carta-img {
+        width: 85vw;
+    }
+}
+
+@media screen and (max-width: 900px) and (orientation: landscape) {
+    #buzon {
+        width: 280px;
+        top: 145px;
+        left: 50%;
+    }
+
+    #buzon.abierto {
+        width: 280px;
+        top: 140px;
+        left: 50%;
+        transform: translateX(-50% -2vh);
+    }
+
+    #pila-cartas {
+        top: 98px;
+        left: 17%;
+        transform: translateX(-50%);
+    }
+.carta-mini {
+        width: 290px;
+        margin-top: -5px; /* pega las cartas */
+}
+
+    }
+
+    .carta-grande {
+        width: 70%;
+        top: 5%;
+    }
+
